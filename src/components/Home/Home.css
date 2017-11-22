@@ -1,0 +1,23 @@
+.table td {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  max-width: 320px;
+}
+
+.table tr td:first-child {
+max-width: 250px;
+}
+
+.table * {
+transition: all .1s linear;
+}
+
+.table thead tr:hover {
+background: none;
+cursor: default;
+}
+
+.table tr:hover {
+  background: rgba(0, 0, 0, .04);
+  cursor: pointer;
+}
