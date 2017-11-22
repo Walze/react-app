@@ -5,7 +5,6 @@ var db = new PouchDB('my_database');
 
 
 var db = new PouchDB('todos');
-var remoteCouch = false;
 
 function addTodo(text) {
   var todo = {
@@ -20,7 +19,7 @@ function addTodo(text) {
   });
 }
 
-function getAll() { 
+function getAll() {
   db.allDocs({ include_docs: true, descending: true }, function (err, doc) {
     console.log(doc.rows);
   });
