@@ -5,12 +5,10 @@ export default class Home extends Component {
   constructor() {
     super();
 
-    
+
   }
 
   render() {
-    // http://talentos.conexaomercado.com.br/Indicadores
-
     return (
       <div className="container" >
 
