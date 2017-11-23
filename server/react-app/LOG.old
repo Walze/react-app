@@ -1,5 +1,5 @@
-2017/11/23-11:53:19.344 24c8 Recovering log #87
-2017/11/23-11:53:19.344 24c8 Level-0 table #89: started
-2017/11/23-11:53:19.431 24c8 Level-0 table #89: 237 bytes OK
-2017/11/23-11:53:19.540 24c8 Delete type=0 #87
-2017/11/23-11:53:19.540 24c8 Delete type=3 #85
+2017/11/23-16:02:05.850 bbc Recovering log #93
+2017/11/23-16:02:05.850 bbc Level-0 table #96: started
+2017/11/23-16:02:05.887 bbc Level-0 table #96: 237 bytes OK
+2017/11/23-16:02:05.990 bbc Delete type=0 #93
+2017/11/23-16:02:05.990 bbc Delete type=3 #91
