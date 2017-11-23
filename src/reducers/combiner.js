@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import dumbData from './reducers';
+import { gotPosts } from './reducers';
 
 
 const allReducers = combineReducers({
-  dumbData,
+  posts: gotPosts,
 });
 
 export default allReducers

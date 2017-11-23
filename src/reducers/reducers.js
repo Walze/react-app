@@ -1,5 +1,9 @@
 
-export default function () {
+export function gotPosts(state = [], action) {
+  const posts = action.payload
 
-  return [0,1,2,3,4];
+  if (action.type === "GOT_POSTS")
+    posts.map(post => state = [...state, post])
+
+  return state
 }
