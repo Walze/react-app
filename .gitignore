@@ -4,7 +4,8 @@
 /node_modules
 
 #database
-/Server/react-app
+Server/react-app/
+/Server/react-app/*
 
 # testing
 /coverage
