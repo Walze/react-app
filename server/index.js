@@ -23,6 +23,28 @@ app.get('/', (req, res) => {
   })
 })
 
-app.all('/user', (req, res) => {
-  res.send(req.body)
+app.post('/user', (req, res) => {
+  const data = req.body;
+  const response = res;
+  db.find({
+    selector: { email: data.email },
+  }).then(function (res) {
+
+    console.log(res.docs);
+
+    if (!res.docs.length) {
+
+      db.put(data).then(function (response) {
+        console.log(added)
+        res.send('Added')
+      }).catch(function (err) {
+        console.log(err);
+        res.send(err)
+      });
+
+    } else {
+      response.status(400).json({ error: 'Ja tem' });
+      response.send('Ja tem')
+    }
+  })
 })

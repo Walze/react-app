@@ -20,7 +20,6 @@ class SignUp extends Component {
   submit(e) {
     e.preventDefault()
     this.props.createUser(this.user)
-    alert(JSON.stringify(this.user))
   }
 
   render() {
