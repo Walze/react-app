@@ -1,0 +1,82 @@
+/* 
+#202022 
+#2f2b42
+#3d3a4c
+*/
+
+* {
+    color: white;
+}
+
+html,
+body {
+    background: #202022;
+}
+
+button.btn.btn-primary {
+    background: #2f2b42;
+    border-color: #3d3a4c;
+}
+
+.btn-primary:not([disabled]):not(.disabled).active,
+.btn-primary:not([disabled]):not(.disabled):active,
+.show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #4b4569;
+    border-color: #645b8f;
+    box-shadow: 0 0 0 0.2rem rgba(61, 58, 76, 0.5);
+}
+
+.btn-primary:not([disabled]):not(.disabled).active,
+.btn-primary:not([disabled]):not(.disabled):active,
+.show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #4b4569;
+    border-color: #581dce;
+    box-shadow: 0 0 0 0.2rem rgba(88, 29, 206, 0.25);
+}
+
+.btn-primary.focus,
+.btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem #202022;
+}
+
+.mainColour {
+    background: #202022;
+}
+
+.secondColour {
+    background: #2f2b42;
+}
+
+.form-control {
+    background: #3d3a4c;
+    color: white;
+    border: none;
+}
+
+.form-control:focus {
+    color: #4f4957;
+    background-color: #6f6581;
+    box-shadow: 0 0 0 0.2rem rgba(88, 29, 206, 0.25);
+}
+
+::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #6f6581 !important;
+}
+
+ ::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #6f6581 !important;
+}
+
+ :-ms-input-placeholder {
+    /* IE 10+ */
+    color: #6f6581 !important;
+}
+
+ :-moz-placeholder {
+    /* Firefox 18- */
+    color: #6f6581 !important;
+}

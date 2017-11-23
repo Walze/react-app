@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Home from './Home/Home';
 import SignUp from './SignUp/SignUp';
 
-export default class Nav extends Component {
+export default class Main extends Component {
   render() {
     return (
       <Router>
