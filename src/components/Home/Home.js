@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import './Home.css';
 
-export default class Home extends Component {
-  constructor() {
-    super();
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { test } from './../../actions/actions';
 
-
+class Home extends Component {
+  
+  componentWillMount() {
+    console.log(this.props)
   }
 
   render() {
     return (
       <div className="container" >
 
-        <div id="users">
+        <div id="posts">
           <div className="row">
             <div className="col-3">
               <input className="form-control form-control-sm" placeholder="Procurar" />
@@ -25,20 +28,14 @@ export default class Home extends Component {
           <thead>
             <tr>
               <th name='nome' scope="col">Nome</th>
-              <th name='email' scope="col">Email</th>
               <th name='obs' scope="col">Observação</th>
-              <th name='area_id' scope="col">Área</th>
-              <th name='regiao_id' scope="col">Região</th>
             </tr >
           </thead >
           <tbody className='list'>
 
             <tr>
-              <td className='nome'>interpol</td>
-              <td className='email'>interpol</td>
-              <td className='obs'>interpol</td>
-              <td className='area_id'>interpol</td>
-              <td className='regiao_id'>interpol</td>
+              <td className='nome'>nome</td>
+              <td className='obs'>comment</td>
             </tr>
 
           </tbody >
@@ -49,3 +46,19 @@ export default class Home extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    allstate: state
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    //posts: dispatch.getPosts,
+    test
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
+

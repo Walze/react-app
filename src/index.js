@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import promise from 'redux-promise';
 import { createLogger } from 'redux-logger';
 import App from './App';
-import allReducers from './reducers/index'
+import allReducers from './reducers/combiner'
 import 'bootstrap.native/dist/bootstrap-native-v4';
 
 const logger = createLogger();
