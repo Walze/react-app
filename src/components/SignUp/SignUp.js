@@ -1,22 +1,26 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { createUser } from '../../actions/actions'
 
-export default class SignUp extends Component {
+class SignUp extends Component {
 
   constructor() {
     super()
 
     this.user = {}
-    this.handleChange = this.handleChange.bind(this);
-    this.submit = this.submit.bind(this);
+    this.handleChange = this.handleChange.bind(this)
+    this.submit = this.submit.bind(this)
   }
 
   handleChange(e) {
-    this.user[e.target.name] = e.target.value;
+    this.user[e.target.name] = e.target.value
   }
 
   submit(e) {
-    e.preventDefault();
-    alert(JSON.stringify(this.user));
+    e.preventDefault()
+    this.props.createUser(this.user)
+    alert(JSON.stringify(this.user))
   }
 
   render() {
@@ -75,3 +79,18 @@ export default class SignUp extends Component {
     )
   }
 }
+
+
+function mapStateToProps(state) {
+  return {
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    createUser
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp)
+

@@ -9,3 +9,14 @@ export function getPosts() {
       })
     })
 }
+
+export function createUser(user) {
+  return dispatch =>
+    axios.post('http://localhost:3001/user', user).then(res => {
+      console.log(res.data);
+      dispatch({
+        type: 'CREATED_USER',
+        payload: res.data
+      })
+    })
+}
