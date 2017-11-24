@@ -35,8 +35,7 @@ app.get('/', (req, res) => {
     data.rows.map(row => {
       users.push(row.doc)
     })
-
-    res.send(data)
+    res.send(users)
   })
 })
 
