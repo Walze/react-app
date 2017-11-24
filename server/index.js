@@ -10,6 +10,15 @@ app.use(function (req, res, next) {
   next()
 })
 
+const HTTP_SERVER_ERROR = 500
+app.use(function (err, req, res, next) {
+  if (res.headersSent) {
+    return next(err)
+  }
+
+  return res.status(err.status || HTTP_SERVER_ERROR).render('500')
+})
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   extended: true
@@ -18,33 +27,48 @@ app.use(bodyParser.urlencoded({
 app.listen(3001, () => console.log('Listening on Port 3001'))
 
 app.get('/', (req, res) => {
-  db.allDocs().then((doc) => {
-    res.send(doc.rows)
+  db.allDocs({
+    include_docs: true,
+    attachments: true
+  }).then(function (data) {
+    const users = []
+    data.rows.map(row => {
+      users.push(row.doc)
+    })
+
+    res.send(data)
   })
 })
 
+app.get('/kill', (req, res) => {
+  db.allDocs().then(function (result) {
+    return Promise.all(result.rows.map(function (row) {
+      return db.remove(row.id, row.value.rev)
+    }))
+  })
+  res.send('Done')
+})
+
 app.post('/user', (req, res) => {
-  const data = req.body;
-  const response = res;
+  let request = req.body
+  const response = res
   db.find({
-    selector: { email: data.email },
-  }).then(function (res) {
+    selector: { email: request.email },
+  }).then(function (fetched) {
+    if (!fetched.docs.length) {
 
-    console.log(res.docs);
-
-    if (!res.docs.length) {
-
-      db.put(data).then(function (response) {
-        console.log(added)
-        res.send('Added')
-      }).catch(function (err) {
-        console.log(err);
-        res.send(err)
-      });
+      db.info().then(function (info) {
+        db.put({ ...request, _id: String(++info.doc_count) })
+          .then(function () {
+            res.send('Added')
+          }).catch(function (err) {
+            console.log(err)
+            res.send(err)
+          })
+      }).catch(err => response.send(err))
 
     } else {
-      response.status(400).json({ error: 'Ja tem' });
-      response.send('Ja tem')
+      response.status(409).send('Email already exists')
     }
   })
 })
