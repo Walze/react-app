@@ -20,11 +20,8 @@ class DataBase extends PouchDB {
               ...request,
               _id: String(++info.doc_count)
             }).then(() =>
-              res.send('Added')
-              ).catch((err) => {
-                console.log(err)
-                res.send(err)
-              })
+              response.send('Added')
+              ).catch((err) => response.send(err))
           ).catch(err => response.send(err))
       else
         response.status(409).send('Email already exists')

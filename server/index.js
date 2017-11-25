@@ -12,9 +12,7 @@ app.use(function (req, res, next) {
 
 const HTTP_SERVER_ERROR = 500
 app.use(function (err, req, res, next) {
-  if (res.headersSent) {
-    return next(err)
-  }
+  if (res.headersSent) return next(err)
 
   return res.status(err.status || HTTP_SERVER_ERROR).render('500')
 })
@@ -30,24 +28,20 @@ app.get('/', (req, res) => {
   users.allDocs({
     include_docs: true,
     attachments: true
-  }).then(function (data) {
+  }).then((docs) => {
     const users = []
-    data.rows.map(row => {
-      users.push(row.doc)
-    })
+    docs.rows.map(row => users.push(row.doc))
     res.send(users)
   })
 })
 
 app.get('/kill', (req, res) => {
-  users.allDocs().then(function (result) {
-    return Promise.all(result.rows.map(function (row) {
+  users.allDocs().then((result) => {
+    return Promise.all(result.rows.map((row) => {
       return users.remove(row.id, row.value.rev)
     }))
   })
   res.send('Done')
 })
 
-app.post('/user', (req, res) => {
-  users.create(req, res)
-})
+app.post('/user', (req, res) => users.create(req, res))
