@@ -12,15 +12,16 @@ export function getPosts() {
 
 export function createUser(user) {
   return dispatch =>
-    axios.post('http://localhost:3001/user', user).then(res => {
-      console.log(res, '<< response');
-      dispatch({
+    axios.post('http://localhost:3001/user', user)
+      .then(res => dispatch({
         type: 'CREATED_USER',
         payload: res.data
-      })
-    }).catch(function (err) {
-      console.log(err.response)
-      alert(err.response.data);
-    });
+      }))
+      .catch((err) => {
+        if (err.response.data)
+          console.error(err.response.data);
+        else
+          console.warn(err.response)
+      });
 
 }
