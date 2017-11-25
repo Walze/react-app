@@ -1,7 +1,7 @@
 const express = require('express')
-const DataBase = require('./db')
+const DataBase = require('./users')
 const bodyParser = require('body-parser')
-const db = new DataBase
+const users = new DataBase()
 const app = express()
 
 app.use(function (req, res, next) {
@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({
 app.listen(3001, () => console.log('Listening on Port 3001'))
 
 app.get('/', (req, res) => {
-  db.allDocs({
+  users.allDocs({
     include_docs: true,
     attachments: true
   }).then(function (data) {
@@ -40,34 +40,14 @@ app.get('/', (req, res) => {
 })
 
 app.get('/kill', (req, res) => {
-  db.allDocs().then(function (result) {
+  users.allDocs().then(function (result) {
     return Promise.all(result.rows.map(function (row) {
-      return db.remove(row.id, row.value.rev)
+      return users.remove(row.id, row.value.rev)
     }))
   })
   res.send('Done')
 })
 
 app.post('/user', (req, res) => {
-  let request = req.body
-  const response = res
-  db.find({
-    selector: { email: request.email },
-  }).then(function (fetched) {
-    if (!fetched.docs.length) {
-
-      db.info().then(function (info) {
-        db.put({ ...request, _id: String(++info.doc_count) })
-          .then(function () {
-            res.send('Added')
-          }).catch(function (err) {
-            console.log(err)
-            res.send(err)
-          })
-      }).catch(err => response.send(err))
-
-    } else {
-      response.status(409).send('Email already exists')
-    }
-  })
+  users.create(req, res)
 })
