@@ -7,17 +7,17 @@ class DataBase extends PouchDB {
   }
 
   create(req, res) {
-    const request = req.body
+    const reqData = req.body
     const response = res
 
     this.find({
-      selector: { email: request.email }
+      selector: { email: reqData.email }
     }).then((fetched) => {
       if (!fetched.docs.length)
         this.info()
           .then((info) =>
             this.put({
-              ...request,
+              ...reqData,
               _id: String(++info.doc_count)
             }).then(() =>
               response.send('Added')
