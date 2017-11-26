@@ -1,7 +1,7 @@
 const express = require('express')
-const DataBase = require('./users')
+const Table = require('./TableMaker')
 const bodyParser = require('body-parser')
-const users = new DataBase()
+const users = new Table('users')
 const app = express()
 
 app.use(function (req, res, next) {
@@ -25,23 +25,22 @@ app.use(bodyParser.urlencoded({
 app.listen(3001, () => console.log('Listening on Port 3001'))
 
 app.get('/', (req, res) => {
-  users.allDocs({
-    include_docs: true,
-    attachments: true
-  }).then((docs) => {
-    const users = []
-    docs.rows.map(row => users.push(row.doc))
-    res.send(users)
+  const allUsers = []
+
+  users.all(docs => {
+    docs.rows.map(row => allUsers.push(row.doc))
+    res.send(allUsers)
   })
 })
 
 app.get('/kill', (req, res) => {
-  users.allDocs().then((result) => {
-    return Promise.all(result.rows.map((row) => {
+  users.all(docs => {
+    return Promise.all(docs.rows.map(row => {
       return users.remove(row.id, row.value.rev)
     }))
   })
+
   res.send('Done')
 })
 
-app.post('/user', (req, res) => users.create(req, res))
+app.post('/user', (req, res) => users.create(req.body, res, 'email'))

@@ -1,13 +1,12 @@
-import * as axios from 'axios';
+import * as axios from 'axios'
 
 export function getPosts() {
   return dispatch =>
-    axios.get('http://localhost:3001/').then(res => {
+    axios.get('http://localhost:3001/').then(res =>
       dispatch({
         type: 'GOT_POSTS',
         payload: res.data
-      })
-    })
+      }))
 }
 
 export function createUser(user) {
@@ -19,9 +18,8 @@ export function createUser(user) {
       }))
       .catch((err) => {
         if (err.response.data)
-          console.error(err.response.data);
+          console.error(err.response.data)
         else
           console.warn(err.response)
-      });
-
+      })
 }
