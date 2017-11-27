@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { createUser } from '../../actions/actions'
+import { createUser } from '../../actions/axios'
 
 class SignUp extends Component {
 
@@ -19,7 +19,10 @@ class SignUp extends Component {
 
   submit(e) {
     e.preventDefault()
-    this.props.createUser(this.user)
+    if (this.user.email.indexOf('@') > -1)
+      this.props.createUser(this.user)
+    else
+      alert('Email Invalid')
   }
 
   render() {
@@ -68,7 +71,7 @@ class SignUp extends Component {
             <br />
 
             <div className="col-12 form-group">
-              <button type='submit' className="col-12 btn btn-primary" onClick={this.submit}>Enviar</button>
+              <button type='submit' className="col-12 btn btn-primary" onClick={this.submit}>Sign Up</button>
             </div>
           </div>
         </div>

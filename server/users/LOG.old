@@ -1,5 +1,14 @@
-2017/11/26-18:40:08.269 fcc Recovering log #3
-2017/11/26-18:40:08.269 fcc Level-0 table #5: started
-2017/11/26-18:40:08.277 fcc Level-0 table #5: 584 bytes OK
-2017/11/26-18:40:08.282 fcc Delete type=0 #3
-2017/11/26-18:40:08.283 fcc Delete type=3 #2
+2017/11/27-13:34:42.787 25e8 Recovering log #285
+2017/11/27-13:34:42.787 25e8 Level-0 table #287: started
+2017/11/27-13:34:42.831 25e8 Level-0 table #287: 237 bytes OK
+2017/11/27-13:34:42.930 25e8 Delete type=0 #285
+2017/11/27-13:34:42.930 25e8 Delete type=3 #283
+2017/11/27-13:34:42.936 1bf8 Compacting 4@0 + 1@1 files
+2017/11/27-13:34:42.974 1bf8 Generated table #289@0: 9 keys, 778 bytes
+2017/11/27-13:34:42.974 1bf8 Compacted 4@0 + 1@1 files => 778 bytes
+2017/11/27-13:34:42.992 1bf8 compacted to: files[ 0 1 0 0 0 0 0 ]
+2017/11/27-13:34:42.992 1bf8 Delete type=2 #276
+2017/11/27-13:34:42.992 1bf8 Delete type=2 #278
+2017/11/27-13:34:42.993 1bf8 Delete type=2 #281
+2017/11/27-13:34:42.994 1bf8 Delete type=2 #284
+2017/11/27-13:34:42.996 1bf8 Delete type=2 #287

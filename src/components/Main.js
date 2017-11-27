@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import Home from './Home/Home';
-import SignUp from './SignUp/SignUp';
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import Home from './Home/Home'
+import SignUp from './SignUp/SignUp'
 
 export default class Main extends Component {
   render() {
@@ -17,6 +17,6 @@ export default class Main extends Component {
           <Route path="/signup" component={SignUp} />
         </div>
       </Router>
-    );
+    )
   }
 }
