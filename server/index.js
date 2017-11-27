@@ -17,16 +17,16 @@ app.use(function (err, req, res, next) {
 
 // Cors enabler
 app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept, X-Requested-With,content-type, Authorization');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept, X-Requested-With,content-type, Authorization')
+  res.setHeader('Access-Control-Allow-Credentials', 'true')
+
   next()
 })
 
 // Plugins && Middleware
-app.use(cookieParser());
+app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   extended: true
@@ -64,7 +64,6 @@ app.get('/kill', (req, res) => {
       return users.remove(row.id, row.value.rev)
     }))
   })
-
   res.send('Done')
 })
 
@@ -85,13 +84,16 @@ app.post('/login', (req, res) => {
       sess.email = user.email
 
       req.session.save()
-      res.send(req.session)
+      res.send({
+        msg: 'Logged',
+        session: req.session.user
+      })
 
     } else
       res.status(409).send({
         msg: 'Already Logged',
         session: req.session.user
-      });
+      })
   })
 })
 
