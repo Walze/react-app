@@ -4,7 +4,7 @@ import { gotPosts, createSession } from './reducers';
 
 const allReducers = combineReducers({
   posts: gotPosts,
-  createSession
+  createSession,
 });
 
 export default allReducers

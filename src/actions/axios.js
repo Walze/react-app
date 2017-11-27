@@ -29,10 +29,10 @@ export function loginUser(user) {
   return dispatch =>
     axios.post('http://localhost:3001/login', user, { withCredentials: true })
       .then(res => {
-        console.log(res)
+        console.log(res.data.session)
         dispatch({
           type: CREATE_SESSION,
-          payload: res.data
+          payload: res.data.session
         })
       })
       .catch(err => {

@@ -4,18 +4,18 @@ import { connect } from 'react-redux'
 import { getPosts, loginUser } from './../../actions/axios'
 import './Home.css'
 
-import Cookies from 'universal-cookie'
+import cookie from 'react-cookies'
 
 class Home extends Component {
 
   constructor() {
     super()
 
-    const cookies = new Cookies()
 
-    console.warn(
-      cookies.getAll()
-    )
+
+
+
+
     this.user = {}
     this.handleChange = this.handleChange.bind(this)
     this.submit = this.submit.bind(this)
@@ -23,6 +23,14 @@ class Home extends Component {
   }
 
   componentWillMount() {
+
+    console.log(
+      cookie.loadAll()
+    )
+
+    // for (let cok in cookie.loadAll()) {
+    //   cookie.remove(cok)
+    // }
   }
 
   handleChange(e) {
