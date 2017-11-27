@@ -6,6 +6,7 @@
     "axios": "^0.17.1",
     "bootstrap.native": "^2.0.19",
     "react": "^16.1.1",
+    "react-cookie": "^2.1.2",
     "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",

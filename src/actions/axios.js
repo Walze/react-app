@@ -1,8 +1,8 @@
 import * as axios from 'axios'
 
-export const GOT_POSTS = 'GOT_POSTS';
-export const CREATED_USER = 'CREATED_USER';
-export const LOGIN_USER = 'LOGIN_USER';
+export const GOT_POSTS = 'GOT_POSTS'
+export const CREATED_USER = 'CREATED_USER'
+export const CREATE_SESSION = 'CREATE_SESSION'
 
 export function getPosts() {
   return dispatch =>
@@ -31,7 +31,7 @@ export function loginUser(user) {
       .then(res => {
         console.log(res)
         dispatch({
-          type: LOGIN_USER,
+          type: CREATE_SESSION,
           payload: res.data
         })
       })

@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import './Home.css';
-
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { getPosts, loginUser } from './../../actions/axios';
+import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { getPosts, loginUser } from './../../actions/axios'
+import { withCookies } from 'react-cookie'
+import './Home.css'
 
 class Home extends Component {
 
@@ -13,6 +13,10 @@ class Home extends Component {
     this.user = {}
     this.handleChange = this.handleChange.bind(this)
     this.submit = this.submit.bind(this)
+
+  }
+
+  componentWillMount() {
   }
 
   handleChange(e) {
@@ -22,6 +26,7 @@ class Home extends Component {
   submit(e) {
     e.preventDefault()
     this.props.loginUser(this.user)
+    console.log(this.props.cookies.getAll())
   }
 
   render() {
@@ -69,7 +74,7 @@ class Home extends Component {
 
       </div >
 
-    );
+    )
   }
 }
 
@@ -83,8 +88,8 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     getPosts,
     loginUser
-  }, dispatch);
+  }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(withCookies(Home))
 

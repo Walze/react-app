@@ -1,5 +1,5 @@
 const express = require('express'),
-  Table = require('./TableMaker'),
+  Table = require('./Table'),
   bodyParser = require('body-parser'),
   session = require('express-session'),
   cookieParser = require('cookie-parser'),
@@ -19,7 +19,7 @@ app.use(function (err, req, res, next) {
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE')
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept, X-Requested-With,content-type, Authorization')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept, X-Requested-With, Authorization')
   res.setHeader('Access-Control-Allow-Credentials', 'true')
 
   next()
@@ -49,15 +49,8 @@ app.listen(3001, () => console.log('Listening on Port 3001'))
 
 
 // Route Handler
-app.get('/', (req, res) => {
-  const allUsers = []
 
-  users.all(docs => {
-    docs.rows.map(row => allUsers.push(row.doc))
-    res.send(allUsers)
-  })
-})
-
+//// Deletes all docs
 app.get('/kill', (req, res) => {
   users.all(docs => {
     return Promise.all(docs.rows.map(row => {
@@ -65,6 +58,15 @@ app.get('/kill', (req, res) => {
     }))
   })
   res.send('Done')
+})
+
+app.get('/', (req, res) => {
+  const allUsers = []
+
+  users.all(docs => {
+    docs.rows.map(row => allUsers.push(row.doc))
+    res.send(allUsers)
+  })
 })
 
 app.post('/signup', (req, res) => users.create(req.body, res, 'email'))
