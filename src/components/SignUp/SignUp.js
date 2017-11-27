@@ -33,14 +33,14 @@ class SignUp extends Component {
         <div className='row justify-content-center'>
           <div className="col-6">
             <div className="form-group col-12">
-              <label>Name</label>
+              <label>Username</label>
               <input
-                name='name'
+                name='username'
                 type="text"
                 onChange={this.handleChange}
-                value={this.user.name}
+                value={this.user.username}
                 className="form-control form-control-sm"
-                placeholder="Insert Your Name"
+                placeholder="Insert Your Username"
               />
             </div>
 

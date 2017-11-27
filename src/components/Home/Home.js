@@ -2,14 +2,20 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { getPosts, loginUser } from './../../actions/axios'
-import { withCookies } from 'react-cookie'
 import './Home.css'
+
+import Cookies from 'universal-cookie'
 
 class Home extends Component {
 
   constructor() {
     super()
 
+    const cookies = new Cookies()
+
+    console.warn(
+      cookies.getAll()
+    )
     this.user = {}
     this.handleChange = this.handleChange.bind(this)
     this.submit = this.submit.bind(this)
@@ -26,7 +32,6 @@ class Home extends Component {
   submit(e) {
     e.preventDefault()
     this.props.loginUser(this.user)
-    console.log(this.props.cookies.getAll())
   }
 
   render() {
@@ -42,7 +47,7 @@ class Home extends Component {
                 <label>E-mail</label>
                 <input
                   name='email'
-                  type="email"
+                  type="text"
                   onChange={this.handleChange}
                   value={this.user.email}
                   className="form-control form-control-sm"
@@ -91,5 +96,5 @@ function mapDispatchToProps(dispatch) {
   }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withCookies(Home))
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
 

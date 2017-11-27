@@ -1,9 +1,8 @@
 const express = require('express'),
   Table = require('./Table'),
   bodyParser = require('body-parser'),
-  session = require('express-session'),
   cookieParser = require('cookie-parser'),
-  MemoryStore = require('memorystore')(session),
+  cookieSession = require('cookie-session'),
   users = new Table('users'),
   app = express()
 
@@ -31,17 +30,12 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   extended: true
 }))
+app.use(cookieSession({
+  name: 'session',
+  keys: ['vaporwave'],
 
-app.set('trust proxy', 1)
-app.use(session({
-  secret: 'vaporwave',
-  store: new MemoryStore({
-    checkPeriod: 86400000 // prune expired entries every 24h
-  }),
-  resave: false,
-  saveUninitialized: true,
-  httpOnly: false,
-  cookie: { secure: false }
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }))
 
 // Listener
@@ -50,14 +44,19 @@ app.listen(3001, () => console.log('Listening on Port 3001'))
 
 // Route Handler
 
+
 //// Deletes all docs
-app.get('/kill', (req, res) => {
-  users.all(docs => {
-    return Promise.all(docs.rows.map(row => {
-      return users.remove(row.id, row.value.rev)
-    }))
-  })
-  res.send('Done')
+app.get('/kill/:all?', (req, res) => {
+  req.session = null
+  if (req.params.all) {
+    users.all(docs => {
+      return Promise.all(docs.rows.map(row => {
+        return users.remove(row.id, row.value.rev)
+      }))
+    })
+    res.send('All deleted')
+  }
+  res.send('Sessions deleted')
 })
 
 app.get('/', (req, res) => {
@@ -65,7 +64,10 @@ app.get('/', (req, res) => {
 
   users.all(docs => {
     docs.rows.map(row => allUsers.push(row.doc))
-    res.send(allUsers)
+    res.send([
+      allUsers,
+      req.session,
+    ])
   })
 })
 
@@ -82,7 +84,7 @@ app.post('/login', (req, res) => {
       const user = fetched.docs[0]
 
       sess._id = user._id
-      sess.name = user.name
+      sess.username = user.username
       sess.email = user.email
 
       req.session.save()
@@ -98,4 +100,6 @@ app.post('/login', (req, res) => {
       })
   })
 })
+
+
 

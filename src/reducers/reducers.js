@@ -1,4 +1,6 @@
 import { GOT_POSTS, CREATE_SESSION } from './../actions/axios';
+import Cookies from 'universal-cookie'
+
 
 export function gotPosts(state = [], action) {
   const posts = action.payload
@@ -10,11 +12,11 @@ export function gotPosts(state = [], action) {
 }
 
 export function createSession(state = [], action) {
-  alert(action.type)
+  const cookies = new Cookies()
 
   if (action.type === CREATE_SESSION) {
     //state = {...state, session: action.data}
-    console.warn(action)
+    cookies.set('session', action.payload.session)
   }
 
   return state
