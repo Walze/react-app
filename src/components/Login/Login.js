@@ -16,6 +16,10 @@ class Login extends Component {
     this.submit = this.submit.bind(this)
   }
 
+  componentDidMount() {
+    console.log(this.props)
+  }
+
   handleChange(e) {
     if (!e)
       for (let prop in this.state.user)
@@ -37,7 +41,7 @@ class Login extends Component {
   render() {
     return (
       <div className="container" >
-
+      
         <form className="container">
           <h2>Login</h2>
           <br />

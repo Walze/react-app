@@ -8,7 +8,6 @@ export function storeCookie(sessionParam = null) {
       type: STORE_COOKIE,
       payload: session || sessionParam
     }
-
   else
     return { type: null }
 }

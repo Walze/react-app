@@ -1,7 +1,4 @@
 import React, { Component } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { loggout } from './../../actions/axios'
 
 class NavLogged extends Component {
   constructor() {
@@ -36,16 +33,5 @@ class NavLogged extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    session: state.session
-  }
-}
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    loggout
-  }, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(NavLogged)
+export default NavLogged
