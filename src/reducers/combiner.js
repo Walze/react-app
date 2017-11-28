@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import { gotPosts, createSession } from './reducers';
-
+import { gotPosts } from './reducers';
+import { StoreCookie } from './storeCookie'
 
 const allReducers = combineReducers({
   posts: gotPosts,
-  createSession,
+  session: StoreCookie
 });
 
 export default allReducers

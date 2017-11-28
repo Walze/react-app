@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { getPosts, loginUser } from './../../actions/axios'
-import './Home.css'
+import './Login.css'
 
-import cookie from 'react-cookies'
-
-class Home extends Component {
+class Login extends Component {
 
   constructor() {
     super()
@@ -14,18 +12,14 @@ class Home extends Component {
 
 
 
-
-
     this.user = {}
     this.handleChange = this.handleChange.bind(this)
     this.submit = this.submit.bind(this)
-
   }
 
   componentWillMount() {
 
     console.log(
-      cookie.loadAll()
     )
 
     // for (let cok in cookie.loadAll()) {
@@ -52,33 +46,33 @@ class Home extends Component {
           <div className='row justify-content-center'>
             <div className="col-6">
               <div className="form-group col-12">
-                <label>E-mail</label>
+                <h5>E-mail</h5>
                 <input
                   name='email'
                   type="text"
                   onChange={this.handleChange}
                   value={this.user.email}
-                  className="form-control form-control-sm"
+                  className="form-control form-control-lg"
                   placeholder="Enter your e-mail"
                 />
               </div>
 
               <div className="form-group col-12">
-                <label>Password</label>
+                <h5>Password</h5>
                 <input
                   name='password'
                   type="password"
                   onChange={this.handleChange}
                   value={this.user.password}
-                  className="form-control form-control-sm"
+                  className="form-control form-control-lg"
                   placeholder="Enter Your Password"
                 />
               </div>
 
               <br />
 
-              <div className="col-12 form-group">
-                <button type='submit' className="col-12 btn btn-primary" onClick={this.submit}>Login</button>
+              <div className="col-12 form-group ">
+                <button type='submit' className="col-12 btn btn-primary btn-lg" onClick={this.submit}>Login</button>
               </div>
             </div>
           </div>
@@ -104,5 +98,5 @@ function mapDispatchToProps(dispatch) {
   }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
 
