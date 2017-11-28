@@ -5,6 +5,7 @@ export const GOT_POSTS = 'GOT_POSTS'
 export const CREATED_USER = 'CREATED_USER'
 export const CREATE_SESSION = 'CREATE_SESSION'
 export const LOGGED_OUT = 'LOGGED_OUT'
+export const GET_SESSION = 'GET_SESSION'
 
 export function getPosts() {
   return dispatch =>
@@ -39,6 +40,9 @@ export function loginUser(user) {
         })
       })
       .catch(err => {
+        if (err.response.status === 409)
+          dispatch(storeCookie(err.response.data.session))
+
         console.error(err.response.data || err.response)
       })
 }

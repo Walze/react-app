@@ -9,22 +9,9 @@ class Login extends Component {
   constructor() {
     super()
 
-
-
-
     this.user = {}
     this.handleChange = this.handleChange.bind(this)
     this.submit = this.submit.bind(this)
-  }
-
-  componentWillMount() {
-
-    console.log(
-    )
-
-    // for (let cok in cookie.loadAll()) {
-    //   cookie.remove(cok)
-    // }
   }
 
   handleChange(e) {

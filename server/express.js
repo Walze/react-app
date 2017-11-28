@@ -46,15 +46,15 @@ app.listen(3001, () => console.log('Listening on Port 3001'))
 
 
 //// Deletes all docs
-app.get('/kill/:all?', (req, res) => {
+app.get('/kill/:everyone?', (req, res) => {
   req.session = null
-  if (req.params.all) {
+  if (req.params.everyone) {
     users.all(docs => {
       return Promise.all(docs.rows.map(row => {
         return users.remove(row.id, row.value.rev)
       }))
     })
-    res.send('All deleted')
+    res.send('Everyone deleted')
   }
   res.send('Sessions deleted')
 })
@@ -70,6 +70,8 @@ app.get('/', (req, res) => {
     ])
   })
 })
+
+app.get('/session', (req, res) => res.send(req.session.user))
 
 app.post('/signup', (req, res) => users.create(req.body, res, 'email'))
 
