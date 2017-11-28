@@ -7,7 +7,7 @@ export const StoreCookie = (state = {}, action) => {
         state = session
 
     if (action.type === LOGGED_OUT)
-        state = false
+        state = {}
 
     return state
 }

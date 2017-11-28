@@ -13,10 +13,9 @@ export function cookieHandler(state = null, action) {
   if (action.type === CREATE_SESSION)
     cookie.save('sessionData', action.payload)
 
-  if (action.type === LOGGED_OUT) {
+  if (action.type === LOGGED_OUT)
     cookie.remove('sessionData')
-    console.error(cookie.loadAll())
-  }
+
 
   return state
 }
