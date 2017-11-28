@@ -1,6 +1,5 @@
-import { GOT_POSTS, CREATE_SESSION } from './../actions/axios';
+import { GOT_POSTS, CREATE_SESSION, LOGGED_OUT } from './../actions/axios';
 import cookie from 'react-cookies'
-
 export function gotPosts(state = [], action) {
   const posts = action.payload
 
@@ -10,9 +9,14 @@ export function gotPosts(state = [], action) {
   return state
 }
 
-export function createSession(state = null, action) {
+export function cookieHandler(state = null, action) {
   if (action.type === CREATE_SESSION)
     cookie.save('sessionData', action.payload)
+
+  if (action.type === LOGGED_OUT) {
+    cookie.remove('sessionData')
+    console.error(cookie.loadAll())
+  }
 
   return state
 }

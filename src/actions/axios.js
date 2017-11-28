@@ -3,6 +3,7 @@ import * as axios from 'axios'
 export const GOT_POSTS = 'GOT_POSTS'
 export const CREATED_USER = 'CREATED_USER'
 export const CREATE_SESSION = 'CREATE_SESSION'
+export const LOGGED_OUT = 'LOGGED_OUT'
 
 export function getPosts() {
   return dispatch =>
@@ -33,6 +34,22 @@ export function loginUser(user) {
         dispatch({
           type: CREATE_SESSION,
           payload: res.data.session
+        })
+      })
+      .catch(err => {
+        console.error(err.response.data || err.response)
+      })
+}
+
+export function loggout(e) {
+  console.log(e)
+  return dispatch =>
+    axios.get('http://localhost:3001/kill', { withCredentials: true })
+      .then(res => {
+        alert(res.data)
+
+        dispatch({
+          type: LOGGED_OUT
         })
       })
       .catch(err => {

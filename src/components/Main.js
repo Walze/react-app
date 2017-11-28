@@ -1,49 +1,55 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { storeCookie } from './../actions/STORE_COOKIE'
 
 import Login from './Login/Login'
 import SignUp from './SignUp/SignUp'
+import NavLogin from './Nav/NavLogin'
+import NavLogged from './Nav/NavLogged'
+
 
 class Main extends Component {
-  componentWillMount() {
-    this.props.storeCookie()
-  }
+	componentWillMount() {
+		this.props.storeCookie()
+	}
 
-  render() {
-    return (
-      <Router>
-        <div>
-          <ul className="nav justify-content-center">
-            <li className='nav-item'>
-              <Link className='nav-link' to="/">Login</Link>
-            </li>
-            <li className='nav-item'>
-              <Link className='nav-link' to="/signup">Sign Up</Link>
-            </li>
-          </ul>
+	navDisplay() {
+		if (!this.props.session.username)
+			return <NavLogin />
+		else
+			return <NavLogged session={this.props.session} />
+	}
 
-          <Route exact path="/" component={Login} />
-          <Route path="/signup" component={SignUp} />
-        </div>
-      </Router>
-    )
-  }
+	render() {
+		return (
+			<Router>
+				<div>
+
+					{this.navDisplay()}
+					{JSON.stringify(this.props.session)}
+
+
+					<Route exact path="/" component={Login} />
+					<Route path="/signup" component={SignUp} />
+				</div>
+			</Router>
+		)
+	}
 }
 
 
 function mapStateToProps(state) {
-  return {
-    session: state.session
-  }
+	return {
+		session: state.session
+	}
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    storeCookie
-  }, dispatch)
+	return bindActionCreators({
+		storeCookie
+	}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main)
