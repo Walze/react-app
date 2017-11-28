@@ -6,21 +6,32 @@ import './Login.css'
 
 class Login extends Component {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
-    this.user = {}
+    this.state = {
+      user: {}
+    }
     this.handleChange = this.handleChange.bind(this)
     this.submit = this.submit.bind(this)
   }
 
   handleChange(e) {
-    this.user[e.target.name] = e.target.value
+    if (!e)
+      for (let prop in this.state.user)
+        this.setState({ user: { [prop]: '' } })
+    else
+      this.setState({
+        user: {
+          [e.target.name]: e.target.value
+        }
+      })
   }
 
   submit(e) {
+    this.props.loginUser(this.state.user)
+    this.handleChange(false)
     e.preventDefault()
-    this.props.loginUser(this.user)
   }
 
   render() {
@@ -38,7 +49,7 @@ class Login extends Component {
                   name='email'
                   type="text"
                   onChange={this.handleChange}
-                  value={this.user.email}
+                  value={this.state.user.email || ''}
                   className="form-control form-control-lg"
                   placeholder="Enter your e-mail"
                 />
@@ -50,7 +61,7 @@ class Login extends Component {
                   name='password'
                   type="password"
                   onChange={this.handleChange}
-                  value={this.user.password}
+                  value={this.state.user.password || ''}
                   className="form-control form-control-lg"
                   placeholder="Enter Your Password"
                 />

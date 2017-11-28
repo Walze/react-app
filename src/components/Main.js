@@ -31,7 +31,7 @@ class Main extends Component {
 					{JSON.stringify(this.props.session)}
 
 
-					<Route exact path="/" component={Login} />
+					<Route path="/login" component={Login} />
 					<Route path="/signup" component={SignUp} />
 				</div>
 			</Router>

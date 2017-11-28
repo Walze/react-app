@@ -48,12 +48,10 @@ export function loginUser(user) {
 }
 
 export function loggout(e) {
-  console.log(e)
   return dispatch =>
     axios.get('http://localhost:3001/kill', { withCredentials: true })
       .then(res => {
-        alert(res.data)
-
+        //alert(res.data)
         dispatch({
           type: LOGGED_OUT
         })
